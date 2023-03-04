@@ -1,0 +1,31 @@
+﻿<Page x:Class="Pigalev_Sessia1.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pigalev_Sessia1"
+      mc:Ignorable="d" Background="White"
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="Login">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="0" FontSize="38" VerticalAlignment="Center">Авторизация</TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="40">
+                    <GroupBox Header="Введите логин" FontSize="28">
+                        <TextBox x:Name="tbLogin" MaxLength="50" MinWidth="300"/>
+                    </GroupBox>
+                    <GroupBox Header="Введите пароль" FontSize="28">
+                        <PasswordBox x:Name="pbPassword" MinWidth="300"/>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <Button x:Name="BtnAutorization" Content="Авторизироваться" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" Click="BtnAutorization_Click"/>
+                    <TextBlock x:Name="tbNewCode" Text="Получить новый код можно будет через 10 секунд" FontSize="18" TextWrapping="Wrap" Visibility="Collapsed"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
