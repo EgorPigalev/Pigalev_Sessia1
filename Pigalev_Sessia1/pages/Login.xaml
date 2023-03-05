@@ -4,9 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Pigalev_Sessia1"
-      mc:Ignorable="d" Background="White"
-      d:DesignHeight="600" d:DesignWidth="1200"
-      Title="Login">
+      mc:Ignorable="d" Style="{StaticResource PageMain}"
+      d:DesignHeight="520" d:DesignWidth="1200"
+      Title="Авторизация">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Vertical">
@@ -23,7 +23,8 @@
                 </StackPanel>
                 <StackPanel Grid.Row="2">
                     <Button x:Name="BtnAutorization" Content="Авторизироваться" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" Click="BtnAutorization_Click"/>
-                    <TextBlock x:Name="tbNewCode" Text="Получить новый код можно будет через 10 секунд" FontSize="18" TextWrapping="Wrap" Visibility="Collapsed"/>
+                    <Button x:Name="BtnGuest" Content="Войти как гость" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" Click="BtnGuest_Click" Cursor="Hand"/>
+                    <TextBlock x:Name="tbNewCode" FontSize="18" TextWrapping="Wrap" Visibility="Collapsed"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

@@ -12,13 +12,13 @@
         <Style x:Key="BtnStyle" TargetType="Button">
             <Style.Setters>
                 <Setter Property="Margin" Value="10"/>
-                <Setter Property="Background" Value="#FF28C1F2"/>
+                <Setter Property="Background" Value="#FF76E383"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Cursor" Value="Hand"/>
             </Style.Setters>
             <Style.Triggers>
                 <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter Property="Background" Value="#FF60AAED"/>
+                    <Setter Property="Background" Value="#FF498C51"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -28,6 +28,15 @@
                 <Setter Property="Height" Value="50"/>
                 <Setter Property="FontSize" Value="26"/>
             </Style.Setters>
+        </Style>
+        <Style x:Key="WindowsMain" TargetType="Window">
+            <Setter Property="FontFamily" Value=" Comic Sans MS"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style x:Key="PageMain" TargetType="Page">
+            <Setter Property="FontFamily" Value=" Comic Sans MS"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="White"/>
         </Style>
     </Application.Resources>
 </Application>

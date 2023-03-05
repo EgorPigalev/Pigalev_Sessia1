@@ -4,11 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pigalev_Sessia1"
-        mc:Ignorable="d" Icon="\resources\Icon.ico"
-        Title="ООО «Пиши-стирай»" Height="600" Width="1000">
+        mc:Ignorable="d" Icon="\resources\Icon.ico" Style="{StaticResource WindowsMain}"
+        Title="ООО «Пиши-стирай»" Height="600" Width="1000" MinHeight="600" MinWidth="1000">
     <Grid>
-        <Frame x:Name="mainFrame">
-            
-        </Frame>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+                <Image Source="/resources/logo.png" Height="70"/>
+                <TextBlock Text="ООО «Пиши-стирай»" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+            </StackPanel>
+            <Frame x:Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden">
+            </Frame>
+        </Grid>
     </Grid>
 </Window>

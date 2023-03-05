@@ -69,6 +69,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="pages\ListProduct.xaml.cs">
+      <DependentUpon>ListProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="classes\PartialProduct.cs" />
     <Compile Include="windows\CAPTCHA.xaml.cs">
       <DependentUpon>CAPTCHA.xaml</DependentUpon>
     </Compile>
@@ -108,6 +112,10 @@
     <Compile Include="User.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Page Include="pages\ListProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\CAPTCHA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
