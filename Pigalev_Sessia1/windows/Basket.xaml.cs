@@ -10,22 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Pigalev_Sessia1
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Basket.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Basket : Window
     {
-        public MainWindow()
+        public Basket(List<ProductBasket> bascet)
         {
             InitializeComponent();
-            Base.baseDate = new BaseDate();
-            FrameClass.frame = mainFrame;
-            FrameClass.frame.Navigate(new Login());
+            lvProduct.ItemsSource = bascet;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBasket_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

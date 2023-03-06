@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pigalev_Sessia1.classes
+namespace Pigalev_Sessia1
 {
     public class Base
     {

@@ -88,6 +88,15 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="miAddBasket" Header="Добавить к заказу" Click="miAddBasket_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
+        <Grid Grid.Row="3">
+            <Button x:Name="btnBack" Content="Назад" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnBack_Click"/>
+            <Button x:Name="btnBasket" Content="Просмотр корзины" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Click="btnBasket_Click" Visibility="Collapsed"/>
+        </Grid>
     </Grid>
 </Page>

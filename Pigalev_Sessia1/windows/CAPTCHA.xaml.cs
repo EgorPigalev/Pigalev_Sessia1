@@ -24,7 +24,7 @@ namespace Pigalev_Sessia1
         {
             InitializeComponent();
             Random rand = new Random();
-            int kolText = rand.Next(4, 10); // Количество символов в строке
+            int kolText = 4; // Количество символов в строке
             text = "";
             for (int i = 0; i < kolText; i++)
             {

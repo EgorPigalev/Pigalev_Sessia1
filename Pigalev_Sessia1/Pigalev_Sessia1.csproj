@@ -69,6 +69,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="classes\ProductBasket.cs" />
+    <Compile Include="windows\Basket.xaml.cs">
+      <DependentUpon>Basket.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\ListProduct.xaml.cs">
       <DependentUpon>ListProduct.xaml</DependentUpon>
     </Compile>
@@ -112,6 +116,10 @@
     <Compile Include="User.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Page Include="windows\Basket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\ListProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

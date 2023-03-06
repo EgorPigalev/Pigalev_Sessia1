@@ -1,5 +1,4 @@
-﻿using Pigalev_Sessia1.classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +20,7 @@ namespace Pigalev_Sessia1
     /// </summary>
     public partial class ListProduct : Page
     {
+        List<ProductBasket> basket = new List<ProductBasket>();
         public ListProduct(User user)
         {
             InitializeComponent();
@@ -91,6 +91,39 @@ namespace Pigalev_Sessia1
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Filter();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            FrameClass.frame.Navigate(new Login());
+        }
+
+        private void miAddBasket_Click(object sender, RoutedEventArgs e)
+        {
+            Product x = (Product)lvListProducts.SelectedItem;
+            bool stock = false;
+            foreach(ProductBasket productBasket in basket)
+            {
+                if(productBasket.product == x)
+                {
+                    productBasket.count = productBasket.count++;
+                    stock = true;
+                }
+            }
+            if(!stock)
+            {
+                ProductBasket product = new ProductBasket();
+                product.product = x;
+                product.count = product.count++;
+                basket.Add(product);
+            }
+            btnBasket.Visibility = Visibility.Visible;
+        }
+
+        private void btnBasket_Click(object sender, RoutedEventArgs e)
+        {
+            Basket basketWindow = new Basket(basket);
+            basketWindow.ShowDialog();
         }
     }
 }
