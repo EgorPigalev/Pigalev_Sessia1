@@ -5,14 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pigalev_Sessia1"
         mc:Ignorable="d" Icon="\resources\Icon.ico" Style="{StaticResource WindowsMain}"
-        Title="Корзина" Height="650" Width="1000" MinHeight="650" MinWidth="1000">
+        Title="Корзина" Height="700" Width="1100" MinHeight="650" MinWidth="1100">
+    <Window.Resources>
+        <BitmapImage x:Key="defaultImage" UriSource="../resources/picture.png"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="5*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Корзина" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Корзина" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tbFIO"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
         <ListView x:Name="lvProduct" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -23,14 +31,49 @@
                 <DataTemplate>
                     <Border Padding="10" CornerRadius="20" BorderThickness="1" BorderBrush="#FF76E383" Background="{Binding colorBackground}">
                         <Grid>
-                            <TextBlock Text="{Binding product}"/>
-                            <TextBox Text="{Binding count}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding product.ProductPhoto, TargetNullValue={StaticResource defaultImage}}" Width="180" HorizontalAlignment="Center"/>
+                            <WrapPanel Orientation="Vertical" Grid.Column="1">
+                                <TextBlock Text="{Binding product.ProductName}" FontWeight="Bold" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding product.ProductArticleNumber, StringFormat={}Артикул: {0}}"/>
+                                <TextBlock Text="{Binding product.UnitsOfMeasurement.UnitOfMEasurement, StringFormat={}Ед. измерения: {0}}"/>
+                                <TextBlock Text="{Binding product.ProductDescription}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding product.Category.ProductCategory, StringFormat={}Категория товара: {0}}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding product.Manufacturer.ProductManufacturer, StringFormat={}Производитель: {0}}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding product.ProductDiscountAmount, StringFormat={}Скидка: {0}%}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Цена: "/>
+                                    <TextBlock Text="{Binding product.ProductCost, StringFormat={}{0:F2}}" TextDecorations="{Binding textDecoration}"/>
+                                    <TextBlock Text=" "/>
+                                    <TextBlock Text="{Binding product.costWithDiscountString}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Количество: "/>
+                                    <TextBox Uid="{Binding product.ProductID}" Text="{Binding count}" MinWidth="100" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged"/>
+                                </StackPanel>
+                                <Button x:Name="btnDelete" Uid="{Binding product.ProductID}" Content="Убрать из корзины" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnDelete_Click"/>
+                            </WrapPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="tbSumma" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
+            <TextBlock x:Name="tbSummaDiscount" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <TextBlock Text="Пункт выдачи: " Margin="10"/>
+            <ComboBox Name="cmbPickupPoint" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="600"/>
+        </StackPanel>
+        <Grid Grid.Row="4">
             <Button x:Name="btnBack" Content="Назад" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnBack_Click"/>
             <Button x:Name="btnBasket" Content="Оформить заказ" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Click="btnBasket_Click"/>
         </Grid>

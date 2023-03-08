@@ -5,27 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0d889dd008044303bf2ddc8c6878a6bf" Name="Diagram1">
-        <EntityTypeShape EntityType="practic18Model.Category" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.Manufacturer" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.Order" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.OrderProduct" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.OrderStatus" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.PickupPoint" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.ProductSuppliers" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.Role" Width="1.5" PointX="1.5" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.UnitsOfMeasurement" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="practic18Model.User" Width="1.5" PointX="0.75" PointY="18" IsExpanded="true" />
-        <AssociationConnector Association="practic18Model.FK_Product_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_Product_Manufacturer" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK__OrderProd__Order__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_Order_OrderStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_Order_PickupPoint" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_Order_User" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_OrderProduct_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_Product_ProductSuppliers" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK_Product_UnitsOfMeasurement" ManuallyRouted="false" />
-        <AssociationConnector Association="practic18Model.FK__User__UserRole__398D8EEE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="practic18Model.Category" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="practic18Model.Manufacturer" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="practic18Model.Order" Width="1.5" PointX="3" PointY="15.5" />
+        <EntityTypeShape EntityType="practic18Model.OrderProduct" Width="1.5" PointX="5.25" PointY="2.25" />
+        <EntityTypeShape EntityType="practic18Model.OrderStatus" Width="1.5" PointX="0.75" PointY="13.5" />
+        <EntityTypeShape EntityType="practic18Model.PickupPoint" Width="1.5" PointX="0.75" PointY="15.875" />
+        <EntityTypeShape EntityType="practic18Model.Product" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="practic18Model.ProductSuppliers" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="practic18Model.Role" Width="1.5" PointX="1.5" PointY="21.75" />
+        <EntityTypeShape EntityType="practic18Model.UnitsOfMeasurement" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="practic18Model.User" Width="1.5" PointX="0.75" PointY="18.125" />
+        <AssociationConnector Association="practic18Model.FK_Product_Category" />
+        <AssociationConnector Association="practic18Model.FK_Product_Manufacturer" />
+        <AssociationConnector Association="practic18Model.FK__OrderProd__Order__403A8C7D" />
+        <AssociationConnector Association="practic18Model.FK_Order_OrderStatus" />
+        <AssociationConnector Association="practic18Model.FK_Order_PickupPoint" />
+        <AssociationConnector Association="practic18Model.FK_Order_User" />
+        <AssociationConnector Association="practic18Model.FK_OrderProduct_Product" />
+        <AssociationConnector Association="practic18Model.FK_Product_ProductSuppliers" />
+        <AssociationConnector Association="practic18Model.FK_Product_UnitsOfMeasurement" />
+        <AssociationConnector Association="practic18Model.FK__User__UserRole__398D8EEE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

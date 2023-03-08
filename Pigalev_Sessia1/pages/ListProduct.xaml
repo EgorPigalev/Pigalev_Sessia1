@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Pigalev_Sessia1"
       mc:Ignorable="d" Style="{StaticResource PageMain}"
-      d:DesignHeight="520" d:DesignWidth="1200"
+      d:DesignHeight="720" d:DesignWidth="1200"
       Title="Список продуктов">
     <Page.Resources>
         <BitmapImage x:Key="defaultImage" UriSource="../resources/picture.png"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="100"/>
             <RowDefinition/>
             <RowDefinition Height="100"/>

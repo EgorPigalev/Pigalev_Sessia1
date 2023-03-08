@@ -8,8 +8,21 @@ namespace Pigalev_Sessia1
 {
     public class ProductBasket
     {
-        public Product product;
-
-        public int count;
+        public Product product { get; set; }
+        public int count { get; set; }
+        public string textDecoration
+        {
+            get
+            {
+                if (product.ProductDiscountAmount != 0)
+                {
+                    return "Strikethrough";
+                }
+                else
+                {
+                    return "Baseline";
+                }
+            }
+        }
     }
 }

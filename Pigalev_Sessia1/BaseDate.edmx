@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище practic18Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище practic18Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ProductCategoryID" />
@@ -24,9 +24,10 @@
             <PropertyRef Name="OrderID" />
           </Key>
           <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNomer" Type="int" Nullable="false" />
           <Property Name="OrderStatusID" Type="int" Nullable="false" />
-          <Property Name="OrderDate" Type="datetime" Nullable="false" />
-          <Property Name="OrderDeliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="OrderDeliveryDate" Type="date" Nullable="false" />
           <Property Name="OrderPickupPointID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" />
           <Property Name="OrderCode" Type="int" Nullable="false" />
@@ -64,7 +65,7 @@
           <Property Name="UnitOfMEasurementID" Type="int" Nullable="false" />
           <Property Name="ProductDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ProductCategoryID" Type="int" Nullable="false" />
-          <Property Name="ProductPhoto" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductPhoto" Type="nvarchar(max)" />
           <Property Name="ProductManufacturerID" Type="int" Nullable="false" />
           <Property Name="ProductSupplerID" Type="int" Nullable="false" />
           <Property Name="ProductCost" Type="decimal" Precision="19" Scale="4" Nullable="false" />
@@ -279,42 +280,95 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="practic18Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BaseDate" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="practic18Model.Category" />
+          <EntitySet Name="Manufacturer" EntityType="practic18Model.Manufacturer" />
+          <EntitySet Name="Order" EntityType="practic18Model.Order" />
+          <EntitySet Name="OrderProduct" EntityType="practic18Model.OrderProduct" />
+          <EntitySet Name="OrderStatus" EntityType="practic18Model.OrderStatus" />
+          <EntitySet Name="PickupPoint" EntityType="practic18Model.PickupPoint" />
+          <EntitySet Name="Product" EntityType="practic18Model.Product" />
+          <EntitySet Name="ProductSuppliers" EntityType="practic18Model.ProductSuppliers" />
+          <EntitySet Name="Role" EntityType="practic18Model.Role" />
+          <EntitySet Name="UnitsOfMeasurement" EntityType="practic18Model.UnitsOfMeasurement" />
+          <EntitySet Name="User" EntityType="practic18Model.User" />
+          <AssociationSet Name="FK_Product_Category" Association="practic18Model.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Manufacturer" Association="practic18Model.FK_Product_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderProd__Order__403A8C7D" Association="practic18Model.FK__OrderProd__Order__403A8C7D">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="practic18Model.FK_Order_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_PickupPoint" Association="practic18Model.FK_Order_PickupPoint">
+            <End Role="PickupPoint" EntitySet="PickupPoint" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="practic18Model.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Product" Association="practic18Model.FK_OrderProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductSuppliers" Association="practic18Model.FK_Product_ProductSuppliers">
+            <End Role="ProductSuppliers" EntitySet="ProductSuppliers" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_UnitsOfMeasurement" Association="practic18Model.FK_Product_UnitsOfMeasurement">
+            <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__UserRole__398D8EEE" Association="practic18Model.FK__User__UserRole__398D8EEE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ProductCategoryID" />
           </Key>
           <Property Name="ProductCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <Property Name="ProductCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="practic18Model.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
             <PropertyRef Name="ProductManufacturerID" />
           </Key>
           <Property Name="ProductManufacturerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductManufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+          <Property Name="ProductManufacturer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="practic18Model.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNomer" Type="Int32" Nullable="false" />
           <Property Name="OrderStatusID" Type="Int32" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="OrderDeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderDeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="OrderPickupPointID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" />
           <Property Name="OrderCode" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrderProduct" Relationship="Self.FK__OrderProd__Order__403A8C7D" FromRole="Order" ToRole="OrderProduct" />
-          <NavigationProperty Name="OrderStatus" Relationship="Self.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
-          <NavigationProperty Name="PickupPoint" Relationship="Self.FK_Order_PickupPoint" FromRole="Order" ToRole="PickupPoint" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="OrderProduct" Relationship="practic18Model.FK__OrderProd__Order__403A8C7D" FromRole="Order" ToRole="OrderProduct" />
+          <NavigationProperty Name="OrderStatus" Relationship="practic18Model.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
+          <NavigationProperty Name="PickupPoint" Relationship="practic18Model.FK_Order_PickupPoint" FromRole="Order" ToRole="PickupPoint" />
+          <NavigationProperty Name="User" Relationship="practic18Model.FK_Order_User" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -324,90 +378,90 @@
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__OrderProd__Order__403A8C7D" FromRole="OrderProduct" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_OrderProduct_Product" FromRole="OrderProduct" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="practic18Model.FK__OrderProd__Order__403A8C7D" FromRole="OrderProduct" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="practic18Model.FK_OrderProduct_Product" FromRole="OrderProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
             <PropertyRef Name="OrderStatusID" />
           </Key>
           <Property Name="OrderStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderStatus1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_OrderStatus" FromRole="OrderStatus" ToRole="Order" />
+          <Property Name="OrderStatus1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="practic18Model.FK_Order_OrderStatus" FromRole="OrderStatus" ToRole="Order" />
         </EntityType>
         <EntityType Name="PickupPoint">
           <Key>
             <PropertyRef Name="OrderPickupPointID" />
           </Key>
           <Property Name="OrderPickupPointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderPickupPoint" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_PickupPoint" FromRole="PickupPoint" ToRole="Order" />
+          <Property Name="OrderPickupPoint" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="practic18Model.FK_Order_PickupPoint" FromRole="PickupPoint" ToRole="Order" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductArticleNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductArticleNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UnitOfMEasurementID" Type="Int32" Nullable="false" />
-          <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProductCategoryID" Type="Int32" Nullable="false" />
-          <Property Name="ProductPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProductManufacturerID" Type="Int32" Nullable="false" />
           <Property Name="ProductSupplerID" Type="Int32" Nullable="false" />
-          <Property Name="ProductCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ProductCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="ProductDiscountAmount" Type="Double" />
           <Property Name="ProductQuantityInStock" Type="Int32" Nullable="false" />
           <Property Name="ProductDiscountMax" Type="Double" />
           <Property Name="ProductStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="OrderProduct" Relationship="Self.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
-          <NavigationProperty Name="ProductSuppliers" Relationship="Self.FK_Product_ProductSuppliers" FromRole="Product" ToRole="ProductSuppliers" />
-          <NavigationProperty Name="UnitsOfMeasurement" Relationship="Self.FK_Product_UnitsOfMeasurement" FromRole="Product" ToRole="UnitsOfMeasurement" />
+          <NavigationProperty Name="Category" Relationship="practic18Model.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Manufacturer" Relationship="practic18Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+          <NavigationProperty Name="OrderProduct" Relationship="practic18Model.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
+          <NavigationProperty Name="ProductSuppliers" Relationship="practic18Model.FK_Product_ProductSuppliers" FromRole="Product" ToRole="ProductSuppliers" />
+          <NavigationProperty Name="UnitsOfMeasurement" Relationship="practic18Model.FK_Product_UnitsOfMeasurement" FromRole="Product" ToRole="UnitsOfMeasurement" />
         </EntityType>
         <EntityType Name="ProductSuppliers">
           <Key>
             <PropertyRef Name="ProductSupplerID" />
           </Key>
           <Property Name="ProductSupplerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductSuppler" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductSuppliers" FromRole="ProductSuppliers" ToRole="Product" />
+          <Property Name="ProductSuppler" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="practic18Model.FK_Product_ProductSuppliers" FromRole="ProductSuppliers" ToRole="Product" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__User__UserRole__398D8EEE" FromRole="Role" ToRole="User" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="practic18Model.FK__User__UserRole__398D8EEE" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
             <PropertyRef Name="UnitOfMEasurementID" />
           </Key>
           <Property Name="UnitOfMEasurementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UnitOfMEasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="Product" />
+          <Property Name="UnitOfMEasurement" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="practic18Model.FK_Product_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserPatronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserLogin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserSurname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserPatronymic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserRole" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__User__UserRole__398D8EEE" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Order" Relationship="practic18Model.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Role" Relationship="practic18Model.FK__User__UserRole__398D8EEE" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="practic18Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="practic18Model.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="ProductCategoryID" />
@@ -418,8 +472,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Manufacturer">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="practic18Model.Manufacturer" Role="Manufacturer" Multiplicity="1" />
+          <End Type="practic18Model.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manufacturer">
               <PropertyRef Name="ProductManufacturerID" />
@@ -430,8 +484,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderProd__Order__403A8C7D">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <End Type="practic18Model.Order" Role="Order" Multiplicity="1" />
+          <End Type="practic18Model.OrderProduct" Role="OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="OrderID" />
@@ -442,8 +496,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_OrderStatus">
-          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="practic18Model.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <End Type="practic18Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderStatus">
               <PropertyRef Name="OrderStatusID" />
@@ -454,8 +508,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_PickupPoint">
-          <End Role="PickupPoint" Type="Self.PickupPoint" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="practic18Model.PickupPoint" Role="PickupPoint" Multiplicity="1" />
+          <End Type="practic18Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PickupPoint">
               <PropertyRef Name="OrderPickupPointID" />
@@ -466,8 +520,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="practic18Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="practic18Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
@@ -478,8 +532,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderProduct_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <End Type="practic18Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="practic18Model.OrderProduct" Role="OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductID" />
@@ -490,8 +544,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_ProductSuppliers">
-          <End Role="ProductSuppliers" Type="Self.ProductSuppliers" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="practic18Model.ProductSuppliers" Role="ProductSuppliers" Multiplicity="1" />
+          <End Type="practic18Model.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductSuppliers">
               <PropertyRef Name="ProductSupplerID" />
@@ -502,8 +556,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_UnitsOfMeasurement">
-          <End Role="UnitsOfMeasurement" Type="Self.UnitsOfMeasurement" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="practic18Model.UnitsOfMeasurement" Role="UnitsOfMeasurement" Multiplicity="1" />
+          <End Type="practic18Model.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UnitsOfMeasurement">
               <PropertyRef Name="UnitOfMEasurementID" />
@@ -514,8 +568,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__User__UserRole__398D8EEE">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="practic18Model.Role" Role="Role" Multiplicity="1" />
+          <End Type="practic18Model.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="RoleID" />
@@ -525,60 +579,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BaseDate" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" />
-          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
-          <EntitySet Name="PickupPoint" EntityType="Self.PickupPoint" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="ProductSuppliers" EntityType="Self.ProductSuppliers" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="UnitsOfMeasurement" EntityType="Self.UnitsOfMeasurement" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
-            <End Role="Manufacturer" EntitySet="Manufacturer" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__Order__403A8C7D" Association="Self.FK__OrderProd__Order__403A8C7D">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderProduct" EntitySet="OrderProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
-            <End Role="OrderStatus" EntitySet="OrderStatus" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_PickupPoint" Association="Self.FK_Order_PickupPoint">
-            <End Role="PickupPoint" EntitySet="PickupPoint" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderProduct_Product" Association="Self.FK_OrderProduct_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="OrderProduct" EntitySet="OrderProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductSuppliers" Association="Self.FK_Product_ProductSuppliers">
-            <End Role="ProductSuppliers" EntitySet="ProductSuppliers" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_UnitsOfMeasurement" Association="Self.FK_Product_UnitsOfMeasurement">
-            <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__UserRole__398D8EEE" Association="Self.FK__User__UserRole__398D8EEE">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -587,112 +588,113 @@
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="practic18Model.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
                 <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manufacturer">
             <EntityTypeMapping TypeName="practic18Model.Manufacturer">
               <MappingFragment StoreEntitySet="Manufacturer">
-                <ScalarProperty Name="ProductManufacturerID" ColumnName="ProductManufacturerID" />
                 <ScalarProperty Name="ProductManufacturer" ColumnName="ProductManufacturer" />
+                <ScalarProperty Name="ProductManufacturerID" ColumnName="ProductManufacturerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="practic18Model.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="OrderDeliveryDate" ColumnName="OrderDeliveryDate" />
-                <ScalarProperty Name="OrderPickupPointID" ColumnName="OrderPickupPointID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="OrderPickupPointID" ColumnName="OrderPickupPointID" />
+                <ScalarProperty Name="OrderDeliveryDate" ColumnName="OrderDeliveryDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
+                <ScalarProperty Name="OrderNomer" ColumnName="OrderNomer" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderProduct">
             <EntityTypeMapping TypeName="practic18Model.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderStatus">
             <EntityTypeMapping TypeName="practic18Model.OrderStatus">
               <MappingFragment StoreEntitySet="OrderStatus">
-                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
                 <ScalarProperty Name="OrderStatus1" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PickupPoint">
             <EntityTypeMapping TypeName="practic18Model.PickupPoint">
               <MappingFragment StoreEntitySet="PickupPoint">
-                <ScalarProperty Name="OrderPickupPointID" ColumnName="OrderPickupPointID" />
                 <ScalarProperty Name="OrderPickupPoint" ColumnName="OrderPickupPoint" />
+                <ScalarProperty Name="OrderPickupPointID" ColumnName="OrderPickupPointID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="practic18Model.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ProductArticleNumber" ColumnName="ProductArticleNumber" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="UnitOfMEasurementID" ColumnName="UnitOfMEasurementID" />
-                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
-                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
-                <ScalarProperty Name="ProductPhoto" ColumnName="ProductPhoto" />
-                <ScalarProperty Name="ProductManufacturerID" ColumnName="ProductManufacturerID" />
-                <ScalarProperty Name="ProductSupplerID" ColumnName="ProductSupplerID" />
-                <ScalarProperty Name="ProductCost" ColumnName="ProductCost" />
-                <ScalarProperty Name="ProductDiscountAmount" ColumnName="ProductDiscountAmount" />
-                <ScalarProperty Name="ProductQuantityInStock" ColumnName="ProductQuantityInStock" />
-                <ScalarProperty Name="ProductDiscountMax" ColumnName="ProductDiscountMax" />
                 <ScalarProperty Name="ProductStatus" ColumnName="ProductStatus" />
+                <ScalarProperty Name="ProductDiscountMax" ColumnName="ProductDiscountMax" />
+                <ScalarProperty Name="ProductQuantityInStock" ColumnName="ProductQuantityInStock" />
+                <ScalarProperty Name="ProductDiscountAmount" ColumnName="ProductDiscountAmount" />
+                <ScalarProperty Name="ProductCost" ColumnName="ProductCost" />
+                <ScalarProperty Name="ProductSupplerID" ColumnName="ProductSupplerID" />
+                <ScalarProperty Name="ProductManufacturerID" ColumnName="ProductManufacturerID" />
+                <ScalarProperty Name="ProductPhoto" ColumnName="ProductPhoto" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="UnitOfMEasurementID" ColumnName="UnitOfMEasurementID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductArticleNumber" ColumnName="ProductArticleNumber" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductSuppliers">
             <EntityTypeMapping TypeName="practic18Model.ProductSuppliers">
               <MappingFragment StoreEntitySet="ProductSuppliers">
-                <ScalarProperty Name="ProductSupplerID" ColumnName="ProductSupplerID" />
                 <ScalarProperty Name="ProductSuppler" ColumnName="ProductSuppler" />
+                <ScalarProperty Name="ProductSupplerID" ColumnName="ProductSupplerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="practic18Model.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitsOfMeasurement">
             <EntityTypeMapping TypeName="practic18Model.UnitsOfMeasurement">
               <MappingFragment StoreEntitySet="UnitsOfMeasurement">
-                <ScalarProperty Name="UnitOfMEasurementID" ColumnName="UnitOfMEasurementID" />
                 <ScalarProperty Name="UnitOfMEasurement" ColumnName="UnitOfMEasurement" />
+                <ScalarProperty Name="UnitOfMEasurementID" ColumnName="UnitOfMEasurementID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="practic18Model.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserPatronymic" ColumnName="UserPatronymic" />
-                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
                 <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserPatronymic" ColumnName="UserPatronymic" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

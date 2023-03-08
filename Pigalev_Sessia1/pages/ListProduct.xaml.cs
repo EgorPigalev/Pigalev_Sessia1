@@ -21,10 +21,12 @@ namespace Pigalev_Sessia1
     public partial class ListProduct : Page
     {
         List<ProductBasket> basket = new List<ProductBasket>();
+        User user;
         public ListProduct(User user)
         {
             InitializeComponent();
             CreatingFields();
+            this.user = user;
             tbFIO.Text = "" + user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
         }
         public ListProduct()
@@ -106,7 +108,7 @@ namespace Pigalev_Sessia1
             {
                 if(productBasket.product == x)
                 {
-                    productBasket.count = productBasket.count++;
+                    productBasket.count = productBasket.count+=1;
                     stock = true;
                 }
             }
@@ -114,7 +116,7 @@ namespace Pigalev_Sessia1
             {
                 ProductBasket product = new ProductBasket();
                 product.product = x;
-                product.count = product.count++;
+                product.count = 1;
                 basket.Add(product);
             }
             btnBasket.Visibility = Visibility.Visible;
@@ -122,8 +124,12 @@ namespace Pigalev_Sessia1
 
         private void btnBasket_Click(object sender, RoutedEventArgs e)
         {
-            Basket basketWindow = new Basket(basket);
+            Basket basketWindow = new Basket(basket, user);
             basketWindow.ShowDialog();
+            if(basket.Count == 0)
+            {
+                btnBasket.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

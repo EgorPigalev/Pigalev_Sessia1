@@ -21,6 +21,7 @@ namespace Pigalev_Sessia1
         }
     
         public int OrderID { get; set; }
+        public int OrderNomer { get; set; }
         public int OrderStatusID { get; set; }
         public System.DateTime OrderDate { get; set; }
         public System.DateTime OrderDeliveryDate { get; set; }
