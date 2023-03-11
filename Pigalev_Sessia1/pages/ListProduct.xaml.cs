@@ -143,7 +143,31 @@ namespace Pigalev_Sessia1
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Button btn = (Button)sender;
+                int index = Convert.ToInt32(btn.Uid);
+                Product product = Base.baseDate.Product.FirstOrDefault(x => x.ProductID == index);
+                List<OrderProduct> orderProducts = Base.baseDate.OrderProduct.Where(x => x.ProductID == index).ToList();
+                if(orderProducts.Count == 0)
+                {
+                    foreach(OrderProduct orderProduct in orderProducts)
+                    {
+                        Base.baseDate.OrderProduct.Remove(orderProduct);
+                    }
+                    Base.baseDate.Product.Remove(product);
+                    Base.baseDate.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Товар нельзя удалить так как он указан в заказе!");
+                }
+                
+            }
+            catch
+            {
+                MessageBox.Show("При удаление товара возникла ошибка");
+            }
         }
 
         private void btnDelete_Loaded(object sender, RoutedEventArgs e)
