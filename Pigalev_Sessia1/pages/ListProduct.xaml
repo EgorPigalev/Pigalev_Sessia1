@@ -79,6 +79,7 @@
                                     <TextBlock Text=" "/>
                                     <TextBlock Text="{Binding costWithDiscountString}"/>
                                 </StackPanel>
+                                <Button x:Name="btnDelete" Uid="{Binding ProductID}" Content="Удалить" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnDelete_Click" Loaded="btnDelete_Loaded" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <TextBlock Text="Скидка:" HorizontalAlignment="Center"/>
@@ -97,6 +98,7 @@
         <Grid Grid.Row="3">
             <Button x:Name="btnBack" Content="Назад" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnBack_Click"/>
             <Button x:Name="btnBasket" Content="Просмотр корзины" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Click="btnBasket_Click" Visibility="Collapsed"/>
+            <Button x:Name="btnOrders" Content="Оформленные заказы" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Right" Click="btnOrders_Click" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

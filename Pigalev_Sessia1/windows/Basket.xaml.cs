@@ -20,6 +20,8 @@ namespace Pigalev_Sessia1
     /// </summary>
     public partial class Basket : Window
     {
+        double summa;
+        double summaDiscount;
         User user;
         List<ProductBasket> bascet;
         public Basket(List<ProductBasket> bascet, User user)
@@ -85,6 +87,8 @@ namespace Pigalev_Sessia1
                 }
                 Base.baseDate.SaveChanges();
                 MessageBox.Show("Заказ успешно создан");
+                Ticket ticket = new Ticket(order, bascet, summa, summaDiscount);
+                ticket.ShowDialog();
                 bascet.Clear();
                 this.Close();
             }
@@ -98,7 +102,7 @@ namespace Pigalev_Sessia1
         {
             foreach(ProductBasket productBasket in bascet)
             {
-                if(productBasket.count < 3 || productBasket.product.ProductQuantityInStock < productBasket.count)
+                if(productBasket.product.ProductQuantityInStock < 3 || productBasket.product.ProductQuantityInStock < productBasket.count)
                 {
                     return true;
                 }
@@ -130,8 +134,8 @@ namespace Pigalev_Sessia1
 
         private void calculateSummaAndDiscount()
         {
-            double summa = 0;
-            double summaDiscount = 0;
+            summa = 0;
+            summaDiscount = 0;
             foreach(ProductBasket productBasket in bascet)
             {
                 summa += productBasket.count * productBasket.product.costWithDiscount;

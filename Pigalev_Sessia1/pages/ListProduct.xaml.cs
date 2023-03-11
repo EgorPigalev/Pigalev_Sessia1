@@ -25,9 +25,13 @@ namespace Pigalev_Sessia1
         public ListProduct(User user)
         {
             InitializeComponent();
-            CreatingFields();
             this.user = user;
+            CreatingFields();
             tbFIO.Text = "" + user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
+            if(user.Role.RoleName == "Менеджер" || user.Role.RoleName == "Администратор")
+            {
+                btnOrders.Visibility = Visibility.Visible;
+            }
         }
         public ListProduct()
         {
@@ -129,6 +133,33 @@ namespace Pigalev_Sessia1
             if(basket.Count == 0)
             {
                 btnBasket.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            FrameClass.frame.Navigate(new ListOrders());
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(user == null)
+            {
+                return;
+            }
+            Button btnDelete = sender as Button;
+            if (user.Role.RoleName == "Менеджер" || user.Role.RoleName == "Администратор")
+            {
+                btnDelete.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnDelete.Visibility = Visibility.Collapsed;
             }
         }
     }

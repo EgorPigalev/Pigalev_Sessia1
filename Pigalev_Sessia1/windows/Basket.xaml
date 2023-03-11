@@ -38,17 +38,17 @@
                             <Image Source="{Binding product.ProductPhoto, TargetNullValue={StaticResource defaultImage}}" Width="180" HorizontalAlignment="Center"/>
                             <WrapPanel Orientation="Vertical" Grid.Column="1">
                                 <TextBlock Text="{Binding product.ProductName}" FontWeight="Bold" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding product.ProductDescription}" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding product.ProductArticleNumber, StringFormat={}Артикул: {0}}"/>
                                 <TextBlock Text="{Binding product.UnitsOfMeasurement.UnitOfMEasurement, StringFormat={}Ед. измерения: {0}}"/>
-                                <TextBlock Text="{Binding product.ProductDescription}" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding product.Category.ProductCategory, StringFormat={}Категория товара: {0}}" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding product.Manufacturer.ProductManufacturer, StringFormat={}Производитель: {0}}" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding product.ProductDiscountAmount, StringFormat={}Скидка: {0}%}"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Цена: "/>
                                     <TextBlock Text="{Binding product.ProductCost, StringFormat={}{0:F2}}" TextDecorations="{Binding textDecoration}"/>
                                     <TextBlock Text=" "/>
                                     <TextBlock Text="{Binding product.costWithDiscountString}"/>
+                                    <TextBlock Text="{Binding product.ProductDiscountAmount, StringFormat={}  Скидка: {0}%}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Количество: "/>
