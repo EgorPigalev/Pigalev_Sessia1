@@ -82,6 +82,7 @@
     <Compile Include="pages\ListOrders.xaml.cs">
       <DependentUpon>ListOrders.xaml</DependentUpon>
     </Compile>
+    <Compile Include="classes\PartialOrder.cs" />
     <Compile Include="Ticket.xaml.cs">
       <DependentUpon>Ticket.xaml</DependentUpon>
     </Compile>

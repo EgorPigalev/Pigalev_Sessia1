@@ -46,7 +46,46 @@
                 <DataTemplate>
                     <Border Padding="10" CornerRadius="20" BorderThickness="1" BorderBrush="#FF76E383">
                         <Grid>
-                            <TextBlock Text="{Binding OrderNomer}"/>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Номер:" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding OrderNomer}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="Дата заказа:" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding OrderDate, StringFormat=d}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Дата доставки:" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding OrderDeliveryDate, StringFormat=d}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Margin="10">
+                                    <TextBlock Text="Состав заказа: "/>
+                                    <TextBlock Text="{Binding OrderList}"/>
+                                </StackPanel>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Сумма заказа:" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Summa, StringFormat={}{0}руб.}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="Скидка:" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Discount, StringFormat={}{0}%}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock Text="{Binding User.FIO, StringFormat={}Клиент: {0}}"/>
+                            </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
