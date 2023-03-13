@@ -20,14 +20,14 @@ namespace Pigalev_Sessia1
     /// </summary>
     public partial class ListProduct : Page
     {
-        List<ProductBasket> basket = new List<ProductBasket>();
-        User user;
+        List<ProductBasket> basket = new List<ProductBasket>(); // Корзина куда добавляются товары и их колличество
+        User user; // Пользователь, который авторизировался
         public ListProduct(User user)
         {
             InitializeComponent();
             this.user = user;
             CreatingFields();
-            tbFIO.Text = "" + user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
+            tbFIO.Text = user.FIO;
             if(user.Role.RoleName == "Менеджер" || user.Role.RoleName == "Администратор")
             {
                 btnOrders.Visibility = Visibility.Visible;
@@ -39,6 +39,9 @@ namespace Pigalev_Sessia1
             CreatingFields();
         }
 
+        /// <summary>
+        /// Заполнение стандартных данных
+        /// </summary>
         public void CreatingFields()
         {
             lvListProducts.ItemsSource = Base.baseDate.Product.ToList();
@@ -47,14 +50,17 @@ namespace Pigalev_Sessia1
             tbCountProduct.Text = "" + Base.baseDate.Product.ToList().Count() + " из " + Base.baseDate.Product.ToList().Count();
         }
 
+        /// <summary>
+        /// Поиск, сортировка и фильтрация списка продуктов
+        /// </summary>
         public void Filter()
         {
             List<Product> products = Base.baseDate.Product.ToList();
-            if(tbSearch.Text.Length > 0)
+            if(tbSearch.Text.Length > 0) // Если поле для поиска заполнено
             {
                 products = products.Where(x => x.ProductName.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
             }
-            if(cbFilt.SelectedIndex > 0)
+            if(cbFilt.SelectedIndex > 0) // Если фильрация выбрана
             {
                 switch(cbFilt.SelectedIndex)
                 {
@@ -69,7 +75,7 @@ namespace Pigalev_Sessia1
                         break;
                 }
             }
-            if(cbSort.SelectedIndex > 0)
+            if(cbSort.SelectedIndex > 0) // Если выбрана сортировка
             {
                 switch (cbSort.SelectedIndex)
                 {
@@ -107,16 +113,16 @@ namespace Pigalev_Sessia1
         private void miAddBasket_Click(object sender, RoutedEventArgs e)
         {
             Product x = (Product)lvListProducts.SelectedItem;
-            bool stock = false;
+            bool stock = false; // Наличие товара (true - товар есть; false - товара нет)
             foreach(ProductBasket productBasket in basket)
             {
-                if(productBasket.product == x)
+                if(productBasket.product == x) // Увеличение колличества товара в корзине на +1
                 {
                     productBasket.count = productBasket.count+=1;
                     stock = true;
                 }
             }
-            if(!stock)
+            if(!stock) // Добавление нового товара в корзину
             {
                 ProductBasket product = new ProductBasket();
                 product.product = x;
@@ -138,7 +144,14 @@ namespace Pigalev_Sessia1
 
         private void btnOrders_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.frame.Navigate(new ListOrders());
+            if(user != null)
+            {
+                FrameClass.frame.Navigate(new ListOrders(user));
+            }
+            else
+            {
+                FrameClass.frame.Navigate(new ListOrders());
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -149,12 +162,8 @@ namespace Pigalev_Sessia1
                 int index = Convert.ToInt32(btn.Uid);
                 Product product = Base.baseDate.Product.FirstOrDefault(x => x.ProductID == index);
                 List<OrderProduct> orderProducts = Base.baseDate.OrderProduct.Where(x => x.ProductID == index).ToList();
-                if(orderProducts.Count == 0)
+                if(orderProducts.Count == 0) // Если отсутсвуют заказы с таким товаром, то товар можно удалить
                 {
-                    foreach(OrderProduct orderProduct in orderProducts)
-                    {
-                        Base.baseDate.OrderProduct.Remove(orderProduct);
-                    }
                     Base.baseDate.Product.Remove(product);
                     Base.baseDate.SaveChanges();
                 }

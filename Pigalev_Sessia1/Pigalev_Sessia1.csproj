@@ -83,7 +83,8 @@
       <DependentUpon>ListOrders.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\PartialOrder.cs" />
-    <Compile Include="Ticket.xaml.cs">
+    <Compile Include="classes\PartialUser.cs" />
+    <Compile Include="windows\Ticket.xaml.cs">
       <DependentUpon>Ticket.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\Basket.xaml.cs">
@@ -136,7 +137,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ticket.xaml">
+    <Page Include="windows\Ticket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

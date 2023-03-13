@@ -59,11 +59,11 @@
                                     </StackPanel>
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Text="Дата заказа:" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="{Binding OrderDate, StringFormat=d}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding OrderDate, StringFormat=D}" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                     <StackPanel Grid.Column="2">
                                         <TextBlock Text="Дата доставки:" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="{Binding OrderDeliveryDate, StringFormat=d}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding OrderDeliveryDate, StringFormat=D}" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Grid>
                                 <StackPanel Margin="10">

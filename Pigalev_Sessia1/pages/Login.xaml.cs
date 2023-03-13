@@ -28,9 +28,9 @@ namespace Pigalev_Sessia1
         public Login()
         {
             InitializeComponent();
-            kolError = 0;
-            correctValue = false;
-            disTimer.Interval = new TimeSpan(0, 0, 1);
+            kolError = 0; // кол-во неудачных входов
+            correctValue = false; // корректность ввода капчи
+            disTimer.Interval = new TimeSpan(0, 0, 1); // интервал времени для таймера
             disTimer.Tick += new EventHandler(DisTimer_Tick);
         }
 
@@ -53,7 +53,7 @@ namespace Pigalev_Sessia1
                     CAPTCHA captcha = new CAPTCHA();
                     captcha.ShowDialog();
                     kolError++;
-                    if (!correctValue)
+                    if (!correctValue) // Если капча не пройдена
                     {
                         BtnAutorization.IsEnabled = false;
                         countTime = 10;

@@ -20,10 +20,10 @@ namespace Pigalev_Sessia1
     /// </summary>
     public partial class Basket : Window
     {
-        double summa;
-        double summaDiscount;
-        User user;
-        List<ProductBasket> bascet;
+        double summa; // Сумма заказа
+        double summaDiscount; // Сумма скидок
+        User user; // Пользователь под которым произведён вход
+        List<ProductBasket> bascet; // Корзина
         public Basket(List<ProductBasket> bascet, User user)
         {
             InitializeComponent();
@@ -51,18 +51,20 @@ namespace Pigalev_Sessia1
             try
             {
                 Order order = new Order();
+                int countDay = 0; // Колличество дней на доставку
                 List<Order> orderLast = Base.baseDate.Order.OrderBy(x => x.OrderNomer).ToList();
                 order.OrderNomer = orderLast[orderLast.Count - 1].OrderNomer + 1;
                 order.OrderStatusID = Base.baseDate.OrderStatus.FirstOrDefault(x => x.OrderStatus1 == "Новый").OrderStatusID;
                 order.OrderDate = DateTime.Now;
                 if (getDeliveryTime())
                 {
-                    order.OrderDeliveryDate = order.OrderDate.AddDays(6);
+                    countDay = 6;
                 }
                 else
                 {
-                    order.OrderDeliveryDate = order.OrderDate.AddDays(3);
+                    countDay = 3;
                 }
+                order.OrderDeliveryDate = order.OrderDate.AddDays(countDay);
                 order.OrderPickupPointID = (int)((Pigalev_Sessia1.PickupPoint)cmbPickupPoint.SelectedItem).OrderPickupPointID;
                 if (user != null)
                 {
@@ -87,7 +89,7 @@ namespace Pigalev_Sessia1
                 }
                 Base.baseDate.SaveChanges();
                 MessageBox.Show("Заказ успешно создан");
-                Ticket ticket = new Ticket(order, bascet, summa, summaDiscount);
+                Ticket ticket = new Ticket(order, bascet, summa, summaDiscount, countDay);
                 ticket.ShowDialog();
                 bascet.Clear();
                 this.Close();
@@ -98,11 +100,15 @@ namespace Pigalev_Sessia1
             }
         }
 
+        /// <summary>
+        /// Определение срока доставки
+        /// </summary>
+        /// <returns></returns>
         private bool getDeliveryTime()
         {
             foreach(ProductBasket productBasket in bascet)
             {
-                if(productBasket.product.ProductQuantityInStock < 3 || productBasket.product.ProductQuantityInStock < productBasket.count)
+                if(productBasket.product.ProductQuantityInStock < 3 || productBasket.product.ProductQuantityInStock < productBasket.count) // Если товара на складе меньше 3 или он отсутсвует для продажи текущего колличества, то заказ будет доставляяться 6 дней
                 {
                     return true;
                 }
@@ -132,6 +138,9 @@ namespace Pigalev_Sessia1
             calculateSummaAndDiscount();
         }
 
+        /// <summary>
+        /// Подсчёт суммы заказа и скидок
+        /// </summary>
         private void calculateSummaAndDiscount()
         {
             summa = 0;
@@ -150,7 +159,7 @@ namespace Pigalev_Sessia1
             TextBox tb = (TextBox)sender;
             int index = Convert.ToInt32(tb.Uid);
             ProductBasket productBasket = bascet.FirstOrDefault(x => x.product.ProductID == index);
-            if(tb.Text.Replace(" ", "") == "")
+            if(tb.Text.Replace(" ", "") == "") // По умолчанию если пполе пустое, то значит колличество 0
             {
                 productBasket.count = 0;
             }
@@ -158,11 +167,11 @@ namespace Pigalev_Sessia1
             {
                 productBasket.count = Convert.ToInt32(tb.Text);
             }
-            if (productBasket.count == 0)
+            if (productBasket.count == 0) // Если колличество 0, то продукт из корзины удаляется
             {
                 bascet.Remove(productBasket);
             }
-            if (bascet.Count == 0)
+            if (bascet.Count == 0) // Если в корзине нет товаров, то окно закрывается
             {
                 this.Close();
             }
