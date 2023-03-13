@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock Text="Корзина" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock x:Name="tbFIO"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tbFIO"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
         </Grid>
         <ListView x:Name="lvProduct" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
             <ListView.ItemContainerStyle>

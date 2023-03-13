@@ -96,7 +96,7 @@
             </ListView.ContextMenu>
         </ListView>
         <Grid Grid.Row="3">
-            <Button x:Name="btnBack" Content="Назад" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnBack_Click"/>
+            <Button x:Name="btnBack" Content="Назад" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnBack_Click" Cursor="Hand"/>
             <Button x:Name="btnBasket" Content="Просмотр корзины" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Click="btnBasket_Click" Visibility="Collapsed"/>
             <Button x:Name="btnOrders" Content="Оформленные заказы" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Right" Click="btnOrders_Click" Visibility="Collapsed"/>
         </Grid>

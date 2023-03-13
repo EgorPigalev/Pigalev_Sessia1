@@ -12,32 +12,32 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid>
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="Талон для получения заказа" HorizontalAlignment="Center" FontWeight="Bold" Margin="10"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tbOrderNomer" Text="Номер заказа: " Grid.Column="0" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="tbDateOrder" Text="Дата заказа: " Grid.Column="1" HorizontalAlignment="Center"/>
-                </Grid>
-                <TextBlock Text="Состав заказа:"/>
-                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="140">
-                    <TextBlock x:Name="tbOrders" ScrollViewer.CanContentScroll="True"/>
-                </ScrollViewer>
-                <Grid Margin="0, 20, 0, 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tbSumma" Text="Сумма заказа: " Grid.Column="0" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="tbSummaDiscount" Text="Сумма скидки: " Grid.Column="1" HorizontalAlignment="Center"/>
-                </Grid>
-                <TextBlock x:Name="tbOrderPickupPoint" Text="Пункт выдачи: " TextWrapping="Wrap"/>
-                <TextBlock x:Name="tbDeliveryDate" Text="Заказ будет готов через " TextWrapping="Wrap"/>
-                <TextBlock x:Name="tbCode" Text="Код получения: " FontSize="28" FontWeight="Bold"/>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Талон для получения заказа" HorizontalAlignment="Center" FontWeight="Bold" Margin="10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="tbOrderNomer" Text="Номер заказа: " Grid.Column="0" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="tbDateOrder" Text="Дата заказа: " Grid.Column="1" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <TextBlock Text="Состав заказа:"/>
+                    <TextBlock x:Name="tbOrders"/>
+                    <Grid Margin="0, 20, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="tbSumma" Text="Сумма заказа: " Grid.Column="0" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="tbSummaDiscount" Text="Сумма скидки: " Grid.Column="1" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <TextBlock x:Name="tbOrderPickupPoint" Text="Пункт выдачи: " TextWrapping="Wrap"/>
+                    <TextBlock x:Name="tbDeliveryDate" Text="Заказ будет готов через " TextWrapping="Wrap"/>
+                    <TextBlock x:Name="tbCode" Text="Код получения: " FontSize="28" FontWeight="Bold"/>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
         <Grid Grid.Row="1">
             <Button x:Name="btnBack" Content="Закрыть" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Left" Click="btnBack_Click"/>

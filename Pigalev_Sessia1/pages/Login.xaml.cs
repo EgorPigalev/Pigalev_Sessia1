@@ -39,28 +39,34 @@ namespace Pigalev_Sessia1
             User user = Base.baseDate.User.FirstOrDefault(x => x.UserLogin == tbLogin.Text && x.UserPassword == pbPassword.Password);
             if(user != null)
             {
-                FrameClass.frame.Navigate(new ListProduct(user));
-            }
-            else
-            {
-                if (kolError == 0)
+                if(kolError == 0)
                 {
-                    MessageBox.Show("Пользователь с таким логиным и паролем не найден!");
-                    kolError++;
+                    FrameClass.frame.Navigate(new ListProduct(user));
                 }
                 else
                 {
                     CAPTCHA captcha = new CAPTCHA();
                     captcha.ShowDialog();
-                    kolError++;
-                    if (!correctValue) // Если капча не пройдена
+                    if (correctValue) // Если капча пройдена
                     {
-                        BtnAutorization.IsEnabled = false;
-                        countTime = 10;
-                        tbNewCode.Text = "Получить новый код можно будет через " + countTime + " секунд";
-                        tbNewCode.Visibility = Visibility.Visible;
-                        disTimer.Start();
+                        FrameClass.frame.Navigate(new ListProduct(user));
                     }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пользователь с таким логиным и паролем не найден!");
+                correctValue = false;
+                CAPTCHA captcha = new CAPTCHA();
+                captcha.ShowDialog();
+                kolError++;
+                if (!correctValue) // Если капча не пройдена
+                {
+                    BtnAutorization.IsEnabled = false;
+                    countTime = 10;
+                    tbNewCode.Text = "Повторно авторизоваться можно через " + countTime + " секунд";
+                    tbNewCode.Visibility = Visibility.Visible;
+                    disTimer.Start();
                 }
             }
         }
@@ -79,7 +85,7 @@ namespace Pigalev_Sessia1
             }
             else
             {
-                tbNewCode.Text = "Получить новый код можно будет через " + countTime + " секунд";
+                tbNewCode.Text = "Повторно авторизоваться можно через " + countTime + " секунд";
             }
             countTime--;
         }

@@ -29,20 +29,29 @@ namespace Pigalev_Sessia1
                 return orderList;
             }
         }
-        public string Summa
+        public double Summa
         {
             get
             {
                 List<OrderProduct> products = Base.baseDate.OrderProduct.Where(x => x.OrderID == OrderID).ToList();
                 double summa = 0;
-                foreach(OrderProduct product in products)
+                foreach (OrderProduct product in products)
                 {
                     summa = summa + ((double)product.Product.ProductCost * product.Product.costWithDiscount / 100) * product.Count;
                 }
-                return "" + summa.ToString("0.00");
+                return summa;
             }
         }
-        public string Discount
+
+        public string StrSumma
+        {
+            get
+            {
+                return "" + Summa.ToString("0.00");
+            }
+        }
+
+        public double DiscountProcent
         {
             get
             {
@@ -58,16 +67,39 @@ namespace Pigalev_Sessia1
                     summa = summa + ((double)product.Product.ProductCost * product.Count);
                 }
                 double procent = (summa - summaDiscount) / summa * 100;
-                return "" + procent.ToString("0.00");
+                return procent;
+            }
+        }
+
+        public string StrDiscount
+        {
+            get
+            {
+                return "" + DiscountProcent.ToString("0.00");
             }
         }
         public SolidColorBrush colorBackground
         {
             get
             {
-                if (10 > 15)
+                bool b = true;
+                List<OrderProduct> orderProducts = Base.baseDate.OrderProduct.Where(x => x.OrderID == OrderID).ToList();
+                foreach(OrderProduct product in orderProducts)
                 {
-                    SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFromString("#7fff00");
+                    if(product.Count > product.Product.ProductQuantityInStock)
+                    {
+                        b = false;
+                        break;
+                    }
+                }
+                if (b)
+                {
+                    SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFromString("#20b2aa");
+                    return color;
+                }
+                else
+                {
+                    SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFromString("#ff8c00");
                     return color;
                 }
                 return Brushes.White;

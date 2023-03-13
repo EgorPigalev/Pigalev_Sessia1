@@ -55,5 +55,55 @@ namespace Pigalev_Sessia1
                 FrameClass.frame.Navigate(new ListProduct());
             }
         }
+
+        private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        /// <summary>
+        /// Фильтрация и сортировка списка заказов
+        /// </summary>
+        private void Filter()
+        {
+            List<Order> orders = Base.baseDate.Order.ToList();
+            if (cbFilt.SelectedIndex > 0) // Если фильрация выбрана
+            {
+                switch (cbFilt.SelectedIndex)
+                {
+                    case 1:
+                        orders = orders.Where(x => x.DiscountProcent > 0 && x.DiscountProcent < 10).ToList();
+                        break;
+                    case 2:
+                        orders = orders.Where(x => x.DiscountProcent >= 10 && x.DiscountProcent < 15).ToList();
+                        break;
+                    case 3:
+                        orders = orders.Where(x => x.DiscountProcent >= 15).ToList();
+                        break;
+                }
+            }
+            if (cbSort.SelectedIndex > 0) // Если выбрана сортировка
+            {
+                switch (cbSort.SelectedIndex)
+                {
+                    case 1:
+                        orders = orders.OrderBy(x => x.Summa).ToList();
+                        break;
+                    case 2:
+                        orders = orders.OrderByDescending(x => x.Summa).ToList();
+                        break;
+                }
+            }
+            lvListOrders.ItemsSource = orders;
+            if (orders.Count == 0)
+            {
+                MessageBox.Show("Данные не найдены");
+            }
+        }
+
+        private void btnChangeStatus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
