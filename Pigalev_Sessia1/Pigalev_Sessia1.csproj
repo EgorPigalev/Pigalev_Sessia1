@@ -78,6 +78,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="windows\ChangeOrderDeliveryDate.xaml.cs">
+      <DependentUpon>ChangeOrderDeliveryDate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ChangeStatusOrder.xaml.cs">
       <DependentUpon>ChangeStatusOrder.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
     <Compile Include="User.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Page Include="windows\ChangeOrderDeliveryDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\ChangeStatusOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

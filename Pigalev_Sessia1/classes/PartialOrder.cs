@@ -86,7 +86,7 @@ namespace Pigalev_Sessia1
                 List<OrderProduct> orderProducts = Base.baseDate.OrderProduct.Where(x => x.OrderID == OrderID).ToList();
                 foreach(OrderProduct product in orderProducts)
                 {
-                    if(product.Count > product.Product.ProductQuantityInStock)
+                    if(product.Count > product.Product.ProductQuantityInStock || product.Product.ProductQuantityInStock <= 3)
                     {
                         b = false;
                         break;

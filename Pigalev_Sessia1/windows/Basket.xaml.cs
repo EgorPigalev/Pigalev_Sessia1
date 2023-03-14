@@ -159,7 +159,7 @@ namespace Pigalev_Sessia1
             TextBox tb = (TextBox)sender;
             int index = Convert.ToInt32(tb.Uid);
             ProductBasket productBasket = bascet.FirstOrDefault(x => x.product.ProductID == index);
-            if(tb.Text.Replace(" ", "") == "") // По умолчанию если пполе пустое, то значит колличество 0
+            if(tb.Text.Replace(" ", "") == "") // По умолчанию если поле пустое, то значит колличество 0
             {
                 productBasket.count = 0;
             }

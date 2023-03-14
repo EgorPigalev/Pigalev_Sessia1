@@ -103,7 +103,20 @@ namespace Pigalev_Sessia1
 
         private void btnChangeStatus_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            int index = Convert.ToInt32(button.Uid);
+            Order order = Base.baseDate.Order.FirstOrDefault(x => x.OrderID == index);
+            ChangeStatusOrder changeStatus = new ChangeStatusOrder(order);
+            changeStatus.ShowDialog();
+        }
 
+        private void btnChangeDeliveryDate_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int index = Convert.ToInt32(button.Uid);
+            Order order = Base.baseDate.Order.FirstOrDefault(x => x.OrderID == index);
+            ChangeOrderDeliveryDate changeOrderDeliveryDate = new ChangeOrderDeliveryDate(order);
+            changeOrderDeliveryDate.ShowDialog();
         }
     }
 }

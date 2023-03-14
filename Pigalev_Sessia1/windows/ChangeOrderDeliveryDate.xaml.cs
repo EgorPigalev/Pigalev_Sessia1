@@ -15,20 +15,17 @@ using System.Windows.Shapes;
 namespace Pigalev_Sessia1
 {
     /// <summary>
-    /// Логика взаимодействия для ChangeStatusOrder.xaml
+    /// Логика взаимодействия для ChangeOrderDeliveryDate.xaml
     /// </summary>
-    public partial class ChangeStatusOrder : Window
+    public partial class ChangeOrderDeliveryDate : Window
     {
         Order order;
-        public ChangeStatusOrder(Order order)
+        public ChangeOrderDeliveryDate(Order order)
         {
             InitializeComponent();
             this.order = order;
             tbHeader.Text = tbHeader.Text + order.OrderNomer;
-            cbStatus.ItemsSource = Base.baseDate.OrderStatus.ToList();
-            cbStatus.SelectedValuePath = "OrderStatusID";
-            cbStatus.DisplayMemberPath = "OrderStatus1";
-            cbStatus.SelectedValue = order.OrderStatusID;
+            dpDeliveryDate.SelectedDate = order.OrderDeliveryDate;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -40,7 +37,7 @@ namespace Pigalev_Sessia1
         {
             try
             {
-                order.OrderStatusID = cbStatus.SelectedIndex + 1;
+                order.OrderDeliveryDate = (DateTime)dpDeliveryDate.SelectedDate;
                 Base.baseDate.SaveChanges();
                 this.Close();
             }

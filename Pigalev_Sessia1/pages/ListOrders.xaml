@@ -58,11 +58,11 @@
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
                                     <TextBlock Text="Дата заказа:" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding OrderDate, StringFormat=D}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding OrderDate, StringFormat=d}" HorizontalAlignment="Center"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
                                     <TextBlock Text="Дата доставки:" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding OrderDeliveryDate, StringFormat=D}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding OrderDeliveryDate, StringFormat=d}" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Grid>
                             <StackPanel Margin="10">
@@ -89,8 +89,8 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="btnChangeStatus" Grid.Column="0" Content="Изменить статус" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Width="300" Click="btnChangeStatus_Click"/>
-                                <Button x:Name="btnChangeDeliveryDate" Grid.Column="1" Content="Изменить дату доставки" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Width="300"/>
+                                <Button x:Name="btnChangeStatus" Uid="{Binding OrderID}" Grid.Column="0" Content="Изменить статус" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Width="300" Click="btnChangeStatus_Click"/>
+                                <Button x:Name="btnChangeDeliveryDate" Uid="{Binding OrderID}" Grid.Column="1" Content="Изменить дату доставки" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnMain}" HorizontalAlignment="Center" Width="300" Click="btnChangeDeliveryDate_Click"/>
                             </Grid>
                         </StackPanel>
                     </Border>
